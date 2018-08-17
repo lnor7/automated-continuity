@@ -50,8 +50,8 @@ def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
             test_pass = 'PASS'
         else:
             test_pass = 'FAIL'
-        f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}{:^20s}{:^20s}'.format(signal_name1, signal_name2, 'Disconnected',
-                                                                           exp_min, exp_max,
+        f.write('{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}'.format(signal_name1, signal_name2, 'Disconnected',
+                                                                           '%.6E' % Decimal(exp_min), '%.6E' % Decimal(exp_max),
                                                                            '%.6E' % Decimal(result), test_pass))
         f.write('\n')
 
@@ -122,7 +122,7 @@ def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
         else:
             test_pass = 'FAIL'
         f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}{:^20s}{:^20s}'.format(signal_name1, signal_name2, 'LED_reverse',
-                                                                           exp_min, exp_max,
+                                                                           '%.6E' % Decimal(exp_min), '%.6E' % Decimal(exp_max),
                                                                            '%.6E' % Decimal(result), test_pass))
         f.write('\n')
 

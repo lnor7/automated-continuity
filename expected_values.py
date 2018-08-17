@@ -7,6 +7,9 @@
 
 import numpy as np
 import pandas as pd
+from decimal import Decimal
+
+disconnected_lower = 40.0e6      # lower bound of expected resistance between supposedly disconnected channels
 
 
 def write_connected(signal_name1, signal_name2, f):
@@ -28,9 +31,9 @@ def write_disconnected(signal_name1, signal_name2, f):
         displaying the expected values for our continuity measurements.
         The two signals SIGNAME1 and SIGNAME2 are expected to be disconnected.
     """
-    f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}' \
+    f.write('{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}' \
             .format(signal_name1, signal_name2, "Disconnected", \
-                    30000000, 9.9e37*1.1))
+                    '%.6E' % Decimal(disconnected_lower), '%.6E' % Decimal(1.1 * disconnected_lower)))
     f.write('\n')
     return
 
@@ -47,9 +50,9 @@ def write_LED(LED_sig, LED_com, f):
                     round(np.random.rand(), 3), round(np.random.rand(), 3) + 3))
     f.write('\n')
 
-    f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}'
+    f.write('{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}'
             .format(LED_sig, LED_com, "LED_reverse",
-                    round(np.random.rand(), 5) * 100000, (round(np.random.rand(), 5) + 3) * 100000))
+                    '%.6E' % Decimal(disconnected_lower), '%.6E' % Decimal(1.1 * disconnected_lower)))
     f.write('\n')
     return
 
