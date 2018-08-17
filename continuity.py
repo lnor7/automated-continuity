@@ -16,6 +16,7 @@ import telnetlib
 disconnected_lower = 40.0e6    # lower bound for the resistance between supposedly disconnected channels
 
 
+
 def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
     """
     Perform measurement on the signal channels specified by one row (taken as an argument)
