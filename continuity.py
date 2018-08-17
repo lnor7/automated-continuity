@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 import time
 import telnetlib
+from decimal import Decimal
 
 disconnected_lower = 40.0e6    # lower bound for the resistance between supposedly disconnected channels
 
@@ -49,9 +50,9 @@ def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
             test_pass = 'PASS'
         else:
             test_pass = 'FAIL'
-        f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}{:^20f}{:^20s}'.format(signal_name1, signal_name2, 'Disconnected',
+        f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}{:^20s}{:^20s}'.format(signal_name1, signal_name2, 'Disconnected',
                                                                            exp_min, exp_max,
-                                                                           result, test_pass))
+                                                                           '%.6E' % Decimal(result), test_pass))
         f.write('\n')
 
 
@@ -69,9 +70,9 @@ def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
             test_pass = 'PASS'
         else:
             test_pass = 'FAIL'
-        f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}{:^20f}{:^20s}'.format(signal_name1, signal_name2, 'Connected',
+        f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}{:^20s}{:^20s}'.format(signal_name1, signal_name2, 'Connected',
                                                                            exp_min, exp_max,
-                                                                           result, test_pass))
+                                                                           '%.6E' % Decimal(result), test_pass))
         f.write('\n')
 
 
@@ -95,9 +96,9 @@ def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
             test_pass = 'PASS'
         else:
             test_pass = 'FAIL'
-        f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}{:^20f}{:^20s}'.format(signal_name1, signal_name2, 'LED_forward',
+        f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}{:^20s}{:^20s}'.format(signal_name1, signal_name2, 'LED_forward',
                                                                            exp_min, exp_max,
-                                                                           result, test_pass))
+                                                                           '%.6E' % Decimal(result), test_pass))
         f.write('\n')
 
 
@@ -120,9 +121,9 @@ def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
             test_pass = 'PASS'
         else:
             test_pass = 'FAIL'
-        f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}{:^20f}{:^20s}'.format(signal_name1, signal_name2, 'LED_reverse',
+        f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}{:^20s}{:^20s}'.format(signal_name1, signal_name2, 'LED_reverse',
                                                                            exp_min, exp_max,
-                                                                           result, test_pass))
+                                                                           '%.6E' % Decimal(result), test_pass))
         f.write('\n')
 
 
@@ -165,9 +166,9 @@ def parallel_disconnected(signal_name1, signal_name2_list, f, signal_name_to_VIB
     satisfied = result > disconnected_lower
     if satisfied:
         for sig in signal_name2_list:
-            f.write('{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}{:^20f}{:^20s}'.format(signal_name1, sig, 'Disconnected',
+            f.write('{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}'.format(signal_name1, sig, 'Disconnected',
                                                                                'Disconnected', 'Disconnected',
-                                                                               result, 'PASS'))
+                                                                               '%.6E' % Decimal(result), 'PASS'))
             f.write('\n')
         return True
     else:
