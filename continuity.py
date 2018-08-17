@@ -150,7 +150,7 @@ def parallel_disconnected(signal_name1, signal_name2_list, f, signal_name_to_VIB
     matrix_loc1 = VIB_to_matrix_loc[signal_name_to_VIB[signal_name1]]
     matrix_locs2 = []
     for name in signal_name2_list:
-        matrix_locs2.append(VIB_to_matrix_loc[signal_name_to_VIB[signal_name1]])
+        matrix_locs2.append(VIB_to_matrix_loc[signal_name_to_VIB[name]])
 
     list_string = "\""
     for loc in matrix_locs2:
