@@ -8,8 +8,16 @@
 import numpy as np
 import pandas as pd
 from decimal import Decimal
+import csv
 
 disconnected_lower = 40.0e6      # lower bound of expected resistance between supposedly disconnected channels
+disconnected_upper = 1.0e38      # upper bound of expected resistance between supposedly disconnected channels
+TES_lower = 100.0                # lower bound of expected resistance for TES connections
+TES_upper = 400.0                # upper bound of expected resistance for TES connections
+SQ_lower = 8.0e3                 # lower bound of expected resistance for SQUID Bias connections
+SQ_upper = 12.0e3                # upper bound of expected resistance for SQUID Bias connections
+SQF_lower = 5.0e3                # lower bound of expected resistance for SQUID Feedback Bias connections
+SQF_upper = 8.0e3                # upper bound of expected resistance for SQUID Feedback Bias connections
 
 
 def write_connected(signal_name1, signal_name2, f):
@@ -33,7 +41,7 @@ def write_disconnected(signal_name1, signal_name2, f):
     """
     f.write('{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}' \
             .format(signal_name1, signal_name2, "Disconnected", \
-                    '%.6E' % Decimal(disconnected_lower), '%.6E' % Decimal(1.1 * disconnected_lower)))
+                    '%.6E' % Decimal(disconnected_lower), '%.6E' % Decimal(disconnected_upper)))
     f.write('\n')
     return
 
@@ -52,7 +60,7 @@ def write_LED(LED_sig, LED_com, f):
 
     f.write('{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}'
             .format(LED_sig, LED_com, "LED_reverse",
-                    '%.6E' % Decimal(disconnected_lower), '%.6E' % Decimal(1.1 * disconnected_lower)))
+                    '%.6E' % Decimal(disconnected_lower), '%.6E' % Decimal(disconnected_upper)))
     f.write('\n')
     return
 
@@ -103,6 +111,35 @@ f = open("expected_result.txt", "w+")
 f.write('{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}'.format('Signal_1', 'Signal_2', 'Expected Continuity', \
                                                      "min", 'max'))
 f.write('\n')
+
+
+
+def is_ground(signal_name):
+    signal_name_decomp = signal_name.split("_")
+    return signal_name_decomp[0] == "AGND"
+
+
+
+connections_values = {}
+
+# a dictionary with keys being channels connected with ground and
+# values being the expected resistance of the connection
+connect_w_groud = {}
+
+with open('all_connections.csv', mode='r') as csv_file:
+    csv_reader = csv.DictReader(csv_file)
+    line_count = 0
+    for row in csv_reader:
+        signal_1, signal_2 = row["Signal_1"], row["Signal_2"]
+        key = {signal_1, signal_2}
+
+        if is_ground(signal_1) and not is_ground(signal_2):
+            if signal_2[0:3] == "TES":
+                connect_w_groud[signal_2] = [TES_lower, TES_upper]
+
+
+    print(f'Processed {line_count} lines.')
+
 
 
 # Actually looping through all the possible pairs

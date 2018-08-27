@@ -121,7 +121,7 @@ def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
             test_pass = 'PASS'
         else:
             test_pass = 'FAIL'
-        f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}{:^20s}{:^20s}'.format(signal_name1, signal_name2, 'LED_reverse',
+        f.write('{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}'.format(signal_name1, signal_name2, 'LED_reverse',
                                                                            '%.6E' % Decimal(exp_min), '%.6E' % Decimal(exp_max),
                                                                            '%.6E' % Decimal(result), test_pass))
         f.write('\n')
@@ -177,7 +177,7 @@ def parallel_disconnected(signal_name1, signal_name2_list, f, signal_name_to_VIB
         
 
 """Making connection to DMM"""
-HOST = "169.254.0.1"
+HOST = "192.168.005.120"
 
 tn = telnetlib.Telnet(HOST)
 
