@@ -3551,7 +3551,7 @@
        LED_3               LED_2            Disconnected        4.000000E+07        1.000000E+38    
        LED_3               LED_0            Disconnected        4.000000E+07        1.000000E+38    
        LED_3               LED_1            Disconnected        4.000000E+07        1.000000E+38    
-       LED_3            LED_COM_TOP         LED_forward           0.978000            3.834000      
+       LED_3            LED_COM_TOP         LED_forward        8000000.000000     11000000.000000   
        LED_3            LED_COM_TOP         LED_reverse         4.000000E+07        1.000000E+38    
        LED_3             AGND_TOP_1         Disconnected        4.000000E+07        1.000000E+38    
        LED_3             AGND_TOP_2         Disconnected        4.000000E+07        1.000000E+38    
@@ -3605,11 +3605,11 @@
     LED_COM_BOT           QRST_T-           Disconnected        4.000000E+07        1.000000E+38    
     LED_COM_BOT           QBIAS_0           Disconnected        4.000000E+07        1.000000E+38    
     LED_COM_BOT           QRST_T+           Disconnected        4.000000E+07        1.000000E+38    
-       LED_2            LED_COM_BOT         LED_forward           0.798000            3.366000      
+       LED_2            LED_COM_BOT         LED_forward        8000000.000000     11000000.000000   
        LED_2            LED_COM_BOT         LED_reverse         4.000000E+07        1.000000E+38    
-       LED_0            LED_COM_BOT         LED_forward           0.603000            3.632000      
+       LED_0            LED_COM_BOT         LED_forward        8000000.000000     11000000.000000   
        LED_0            LED_COM_BOT         LED_reverse         4.000000E+07        1.000000E+38    
-       LED_1            LED_COM_BOT         LED_forward           0.756000            3.441000      
+       LED_1            LED_COM_BOT         LED_forward        8000000.000000     11000000.000000   
        LED_1            LED_COM_BOT         LED_reverse         4.000000E+07        1.000000E+38    
     LED_COM_BOT         LED_COM_TOP         Disconnected        4.000000E+07        1.000000E+38    
     LED_COM_BOT          AGND_TOP_1         Disconnected        4.000000E+07        1.000000E+38    
@@ -3666,7 +3666,7 @@
        LED_4               LED_2            Disconnected        4.000000E+07        1.000000E+38    
        LED_4               LED_0            Disconnected        4.000000E+07        1.000000E+38    
        LED_4               LED_1            Disconnected        4.000000E+07        1.000000E+38    
-       LED_4            LED_COM_TOP         LED_forward           0.626000            3.480000      
+       LED_4            LED_COM_TOP         LED_forward        8000000.000000     11000000.000000   
        LED_4            LED_COM_TOP         LED_reverse         4.000000E+07        1.000000E+38    
        LED_4             AGND_TOP_1         Disconnected        4.000000E+07        1.000000E+38    
        LED_4             AGND_TOP_2         Disconnected        4.000000E+07        1.000000E+38    
@@ -3721,7 +3721,7 @@
        LED_5               LED_2            Disconnected        4.000000E+07        1.000000E+38    
        LED_5               LED_0            Disconnected        4.000000E+07        1.000000E+38    
        LED_5               LED_1            Disconnected        4.000000E+07        1.000000E+38    
-       LED_5            LED_COM_TOP         LED_forward           0.593000            3.310000      
+       LED_5            LED_COM_TOP         LED_forward        8000000.000000     11000000.000000   
        LED_5            LED_COM_TOP         LED_reverse         4.000000E+07        1.000000E+38    
        LED_5             AGND_TOP_1         Disconnected        4.000000E+07        1.000000E+38    
        LED_5             AGND_TOP_2         Disconnected        4.000000E+07        1.000000E+38    

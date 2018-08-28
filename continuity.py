@@ -36,10 +36,11 @@ def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
                              VIB_to_matrix_loc[signal_name_to_VIB[signal_name2]]
 
     if row[2] == "Disconnected":
-        tn.write("resistance_test(\""+matrix_loc1[2::].encode('ascii', 'ignore')+"\",\""+matrix_loc2[2::].encode('ascii', 'ignore')+"\")\n")
-        print matrix_loc1
-        print matrix_loc2
-        result = tn.read_until("Ohm")
+        #tn.write(("resistance_test(\""+matrix_loc1[2::].encode('ascii', 'ignore')+"\",\""+matrix_loc2[2::].encode('ascii', 'ignore')+"\")\n").encode('ascii'))
+        tn.write(("resistance_test(\"" + matrix_loc1[2::] + "\",\"" + matrix_loc2[2::] + "\")\n").encode("ascii"))
+        print(matrix_loc1)
+        print(matrix_loc2)
+        result = tn.read_until(("Ohm").encode("ascii"))
         result = result.split()
         result = float(result[0])
         exp_min = float(row[-2])
@@ -58,8 +59,10 @@ def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
 
 
     elif row[2] == "Connected":
-        tn.write("resistance_test(\""+matrix_loc1[2::].encode('ascii', 'ignore')+"\",\""+matrix_loc2[2::].encode('ascii', 'ignore')+"\")\n")
-        result = tn.read_until("Ohm")
+        #tn.write("resistance_test(\""+matrix_loc1[2::].encode('ascii', 'ignore')+"\",\""+matrix_loc2[2::].encode('ascii', 'ignore')+"\")\n")
+        tn.write(("resistance_test(\"" + matrix_loc1[2::] + "\",\"" + matrix_loc2[2::] + "\")\n").encode("ascii"))
+        #result = tn.read_until("Ohm")
+        result = tn.read_until(("Ohm").encode("ascii"))
         result = result.split()
         result = float(result[0])
         exp_min = float(row[-2])
@@ -84,8 +87,9 @@ def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
         else:
             matrix_loc_pos = matrix_loc1
             matrix_loc_neg = matrix_loc2
-        tn.write("resistance_test(\""+matrix_loc_pos[2::].encode('ascii', 'ignore')+"\",\""+matrix_loc_neg[2::].encode('ascii', 'ignore')+"\")\n")
-        result = tn.read_until("Ohm")
+        tn.write("resistance_test(\""+matrix_loc_pos[2::].encode('ascii', 'ignore')\
+                  +"\",\""+matrix_loc_neg[2::].encode('ascii', 'ignore')+"\")\n")
+        result = tn.read_until(("Ohm").encode("ascii"))
         result = result.split()
         result = float(result[0])
         exp_min = float(row[-2])
@@ -109,8 +113,9 @@ def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
         else:
             matrix_loc_pos = matrix_loc1
             matrix_loc_neg = matrix_loc2
-        tn.write("resistance_test(\""+matrix_loc_neg[2::].encode('ascii', 'ignore')+"\",\""+matrix_loc_pos[2::].encode('ascii', 'ignore')+"\")\n")
-        result = tn.read_until("Ohm")
+        tn.write(("resistance_test(\""+matrix_loc_neg[2::].encode('ascii', 'ignore')\
+                 +"\",\""+matrix_loc_pos[2::].encode('ascii', 'ignore')+"\")\n").encode('ascii'))
+        result = tn.read_until(("Ohm").encode("ascii"))
         result = result.split()
         result = float(result[0])
         exp_min = float(row[-2])
@@ -154,13 +159,15 @@ def parallel_disconnected(signal_name1, signal_name2_list, f, signal_name_to_VIB
 
     list_string = "\""
     for loc in matrix_locs2:
-        list_string += loc[2::].encode('ascii','ignore')+"\",\""
+        #list_string += loc[2::].encode('ascii','ignore')+"\",\""
+        list_string += loc[2::] + "\",\""
 
     list_string = list_string[:-2]
-    print list_string
+    print(list_string)
 
-    tn.write("open_test(\""+matrix_loc1[2::].encode('ascii', 'ignore')+"\",{"+list_string+"})\n")
-    result = tn.read_until("Ohm")
+    # tn.write("open_test(\""+matrix_loc1[2::].encode('ascii', 'ignore')+"\",{"+list_string+"})\n")
+    tn.write(("open_test(\"" + matrix_loc1[2::] + "\",{" + list_string + "})\n").encode("ascii"))
+    result = tn.read_until(("Ohm").encode("ascii"))
     result = result.split()
     result = float(result[0])
     satisfied = result > disconnected_lower
@@ -181,7 +188,7 @@ HOST = "192.168.005.120"
 
 tn = telnetlib.Telnet(HOST)
 
-tn.write("load_functions()\n")
+tn.write(("load_functions()\n").encode('ascii'))
 
 """Parsing expected_result.txt"""
 expected = np.loadtxt(fname = "expected_result.txt", skiprows= 1, dtype = 'str')
