@@ -18,9 +18,13 @@ SQ_lower = 8.0e3                 # lower bound of expected resistance for SQUID 
 SQ_upper = 12.0e3                # upper bound of expected resistance for SQUID Bias connections
 SQF_lower = 5.0e3                # lower bound of expected resistance for SQUID Feedback Bias connections
 SQF_upper = 8.0e3                # upper bound of expected resistance for SQUID Feedback Bias connections
+GND_to_GND = 10
 
+def is_ground(signal_name):
+    signal_name_decomp = signal_name.split("_")
+    return signal_name_decomp[0] == "AGND"
 
-def write_connected(signal_name1, signal_name2, f):
+def write_connected(signal_name1, signal_name2, f, exp_min, exp_max):
     """
         Write a row in the file F, which is supposed to be the file
         displaying the expected values for our continuity measurements.
@@ -114,9 +118,8 @@ f.write('\n')
 
 
 
-def is_ground(signal_name):
-    signal_name_decomp = signal_name.split("_")
-    return signal_name_decomp[0] == "AGND"
+"""Goal: create a dictionary with keys being all the connections pairs and values
+being their expected resistances"""
 
 
 
@@ -124,79 +127,90 @@ connections_values = {}
 
 # a dictionary with keys being channels connected with ground and
 # values being the expected resistance of the connection
-connect_w_groud = {}
+connect_w_ground = {}
 
 with open('all_connections.csv', mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
     line_count = 0
     for row in csv_reader:
         signal_1, signal_2 = row["Signal_1"], row["Signal_2"]
-        key = {signal_1, signal_2}
+        signals_list = [signal_1, signal_2]
+        signals_list.sort()
+        key = signals_list[0] + signals_list[1]
 
         if is_ground(signal_1) and not is_ground(signal_2):
             if signal_2[0:3] == "TES":
-                connect_w_groud[signal_2] = [TES_lower, TES_upper]
-
-
+                connect_w_ground[signal_2] = [TES_lower, TES_upper]
+                connections_values[key] = [TES_lower, TES_upper]
+            else:
+                connect_w_ground[signal_2] = [0, 1.0e9]
+                connections_values[key] = [0, 1.0e9]
+        elif is_ground(signal_2) and not is_ground(signal_1):
+            if signal_1[0:3] == "TES":
+                connect_w_ground[signal_1] = [TES_lower, TES_upper]
+                connections_values[key] = [TES_lower, TES_upper]
+            else:
+                connect_w_ground[signal_1] = [0, 1.0e9]
+                connections_values[key] = [0, 1.0e9]
+        elif is_ground(signal_1) and is_ground(signal_2):
+            connections_values[key] = [0, GND_to_GND]
+        elif signal_1.split("_")[0] == "SQ":
+            connections_values[key] = [SQ_lower, SQ_upper]
+        elif signal_1.split("_")[0] == "SQF":
+            connections_values[key] = [SQF_lower, SQF_upper]
+        else:
+            connections_values[key] = [0, 1.0e9]
     print(f'Processed {line_count} lines.')
 
+ground_connections = list(connect_w_ground.keys())
+N_ground_connections = len(ground_connections)
 
+for i in range(N_ground_connections):
+    for j in range(i + 1, N_ground_connections):
+        signal_1, signal_2 = ground_connections[i], ground_connections[j]
+        signals_list = [signal_1, signal_2]
+        signals_list.sort()
+        key = signals_list[0] + signals_list[1]
+        connections_values[key] = [connect_w_ground[signal_1][0] + connect_w_ground[signal_2][0], \
+                                   connect_w_ground[signal_1][1] + connect_w_ground[signal_2][1]]
 
 # Actually looping through all the possible pairs
 
 for i in range(N_signal_name):
     for j in range(i + 1, N_signal_name):
-        signal_name1 = signal_names[i]
-        signal_name2 = signal_names[j]
-        signal_name1_decomp = signal_name1.split("_")
-        signal_name2_decomp = signal_name2.split("_")
+        signal_name1_orig = signal_names[i]
+        signal_name2_orig = signal_names[j]
+        signal_name1_decomp = signal_name1_orig.split("_")
+        signal_name2_decomp = signal_name2_orig.split("_")
 
+        signal_name1 = signal_name1_orig
+        signal_name2 = signal_name2_orig
 
-        #checking whether there is a return channel
+        if signal_name1_decomp[0] == "AGND":
+            signal_name1 = signal_name1_decomp[0] + "_" + signal_name1_decomp[1]
+        if signal_name2_decomp[0] == "AGND":
+            signal_name2 = signal_name2_decomp[0] + "_" + signal_name2_decomp[1]
 
-        if len(signal_name1_decomp) == 1 or signal_name1_decomp[1] != "RTN":
-            contain_rtn1 = False
-        else:
-            contain_rtn1 = True
+        signal_names_list = [signal_name1, signal_name2]
+        signal_names_list.sort()
+        pair = signal_names_list[0] + signal_names_list[1]
 
-        if len(signal_name2_decomp) == 1 or signal_name2_decomp[1] != "RTN":
-            contain_rtn2 = False
-        else:
-            contain_rtn2 = True
-
-
-        if contain_rtn1 and not contain_rtn2:
-            if len(signal_name1_decomp) == len(signal_name2_decomp) + 1 \
-                and signal_name1_decomp[0] == signal_name2_decomp[0] \
-                and signal_name1_decomp[-1] == signal_name2_decomp[-1]:
-
-                write_connected(signal_name1, signal_name2, f)
-            else:
-                write_disconnected(signal_name1, signal_name2, f)
-
-        elif contain_rtn2 and not contain_rtn1:
-            if len(signal_name2_decomp) == len(signal_name1_decomp) + 1 \
-                and signal_name1_decomp[0] == signal_name2_decomp[0] \
-                and signal_name1_decomp[-1] == signal_name2_decomp[-1]:
-
-                write_connected(signal_name1, signal_name2, f)
-            else:
-                write_disconnected(signal_name1, signal_name2, f)
-
+        if pair in connections_values.keys():
+            write_connected(signal_name1_orig, signal_name2_orig, f, connections_values[pair][0], connections_values[pair][1])
         elif len(signal_name1) >= 4 and signal_name1[0:4] == 'AGND' and \
                 len(signal_name2) >= 4 and signal_name2[0:4] == 'AGND':
-            write_connected(signal_name1, signal_name2, f)   # Ground and ground should be connected
-
+            write_connected(signal_name1_orig, signal_name2_orig, f, 0, GND_to_GND)
         elif signal_name1_decomp[0] == 'LED' and signal_name1_decomp[1] != 'COM' \
                 and signal_name2_decomp[0] == 'LED' and signal_name2_decomp[1] == 'COM':
-            write_LED(signal_name1, signal_name2, f)
+            write_LED(signal_name1_orig, signal_name2_orig, f)
 
         elif signal_name2_decomp[0] == 'LED' and signal_name2_decomp[1] != 'COM' \
                 and signal_name1_decomp[0] == 'LED' and signal_name1_decomp[1] == 'COM':
-            write_LED(signal_name2, signal_name1, f)
+            write_LED(signal_name2_orig, signal_name1_orig, f)
 
         else:
-            write_disconnected(signal_name1, signal_name2, f)
+            write_disconnected(signal_name1_orig, signal_name2_orig, f)
+
 
 f.close()
 
