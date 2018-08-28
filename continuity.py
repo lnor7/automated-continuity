@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 import time
 import telnetlib
+import datetime
 from decimal import Decimal
 
 disconnected_lower = 40.0e6    # lower bound for the resistance between supposedly disconnected channels
@@ -87,8 +88,9 @@ def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
         else:
             matrix_loc_pos = matrix_loc1
             matrix_loc_neg = matrix_loc2
-        tn.write("resistance_test(\""+matrix_loc_pos[2::].encode('ascii', 'ignore')\
-                  +"\",\""+matrix_loc_neg[2::].encode('ascii', 'ignore')+"\")\n")
+        # tn.write("resistance_test(\""+matrix_loc_pos[2::].encode('ascii', 'ignore') +"\",\""+matrix_loc_neg[2::].encode('ascii', 'ignore')+"\")\n")
+        tn.write(("resistance_test(\"" + matrix_loc_pos[2::] + "\",\"" + matrix_loc_neg[2::] + "\")\n").encode("ascii"))
+
         result = tn.read_until(("Ohm").encode("ascii"))
         result = result.split()
         result = float(result[0])
@@ -113,8 +115,9 @@ def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
         else:
             matrix_loc_pos = matrix_loc1
             matrix_loc_neg = matrix_loc2
-        tn.write(("resistance_test(\""+matrix_loc_neg[2::].encode('ascii', 'ignore')\
-                 +"\",\""+matrix_loc_pos[2::].encode('ascii', 'ignore')+"\")\n").encode('ascii'))
+        # tn.write(("resistance_test(\""+matrix_loc_neg[2::].encode('ascii', 'ignore')\
+        #          +"\",\""+matrix_loc_pos[2::].encode('ascii', 'ignore')+"\")\n").encode('ascii'))
+        tn.write(("resistance_test(\"" + matrix_loc_neg[2::] + "\",\"" + matrix_loc_pos[2::] + "\")\n").encode('ascii'))
         result = tn.read_until(("Ohm").encode("ascii"))
         result = result.split()
         result = float(result[0])
@@ -218,6 +221,9 @@ for signal_name in signal_name_to_VIB.keys():
     signal_names.append(signal_name)
 
 f = open("test_result_all.txt", "w+")
+f.write('Time: {}'.format(datetime.datetime.now()))
+f.write("\n")
+f.write("\n")
 f.write('{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}'.format('Signal_1', 'Signal_2', 'Type', \
                                                      "Expected_Min", 'Expected_Max', \
                                                      'Measured_Result', 'Pass?'))
@@ -268,13 +274,16 @@ for i in range(len(expected)):
 
 f.close()
 # Generate a dataframe to manipulate our result easily
-result_df = pd.read_csv("test_result_all.txt", sep='\s+', header=0)
+result_df = pd.read_csv("test_result_all.txt", sep='\s+', header=0, skiprows = 2)
 
 
 
 failed_df = result_df[result_df['Pass?'] != 'PASS']
 
 f_failed = open("test_result_failed.txt", "w+")
+f_failed.write('Time: {}'.format(datetime.datetime.now()))
+f_failed.write("\n")
+f_failed.write("\n")
 f_failed.write('{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}'.format('Signal_1', 'Signal_2', 'Type', \
                                                      "Expected_Min", 'Expected_Max', \
                                                      'Measured_Result', 'Pass?'))

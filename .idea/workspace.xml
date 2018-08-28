@@ -4,8 +4,9 @@
     <list default="true" id="11d7069e-fc0e-4558-b429-f0d13a3063c7" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/continuity.py" afterPath="$PROJECT_DIR$/continuity.py" />
-      <change beforePath="$PROJECT_DIR$/expected_result.txt" afterPath="$PROJECT_DIR$/expected_result.txt" />
-      <change beforePath="$PROJECT_DIR$/~$Continuity_PCB.xlsx" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/expected_values.py" afterPath="$PROJECT_DIR$/expected_values.py" />
+      <change beforePath="$PROJECT_DIR$/test_result_all.txt" afterPath="$PROJECT_DIR$/test_result_all.txt" />
+      <change beforePath="$PROJECT_DIR$/test_result_failed.txt" afterPath="$PROJECT_DIR$/test_result_failed.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,32 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="expected_values.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/expected_values.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1995">
-              <caret line="136" column="26" lean-forward="false" selection-start-line="136" selection-start-column="26" selection-end-line="136" selection-end-column="26" />
-              <folding>
-                <element signature="e#312#330#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="continuity.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/continuity.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="505">
-              <caret line="90" column="81" lean-forward="true" selection-start-line="90" selection-start-column="81" selection-end-line="90" selection-end-column="81" />
-              <folding>
-                <element signature="e#764#782#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -55,8 +31,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/trial.py" />
         <option value="$PROJECT_DIR$/expected_values.py" />
+        <option value="$PROJECT_DIR$/trial.py" />
         <option value="$PROJECT_DIR$/continuity.py" />
       </list>
     </option>
@@ -110,7 +86,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.expected_values">
+  <component name="RunManager" selected="Python.trial">
     <configuration name="expected_values" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -153,8 +129,8 @@
     </list>
     <recent_temporary>
       <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Python.expected_values" />
-        <item index="1" class="java.lang.String" itemvalue="Python.trial" />
+        <item index="0" class="java.lang.String" itemvalue="Python.trial" />
+        <item index="1" class="java.lang.String" itemvalue="Python.expected_values" />
       </list>
     </recent_temporary>
   </component>
@@ -176,7 +152,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20555556" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -275,21 +250,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/trial.py" />
     <entry file="file://$PROJECT_DIR$/expected_values.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1995">
-          <caret line="136" column="26" lean-forward="false" selection-start-line="136" selection-start-column="26" selection-end-line="136" selection-end-column="26" />
+        <state relative-caret-position="2972">
+          <caret line="202" column="22" lean-forward="false" selection-start-line="202" selection-start-column="22" selection-end-line="202" selection-end-column="22" />
           <folding>
             <element signature="e#312#330#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/trial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="31" column="27" lean-forward="true" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/continuity.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="90" column="81" lean-forward="true" selection-start-line="90" selection-start-column="81" selection-end-line="90" selection-end-column="81" />
+        <state relative-caret-position="153">
+          <caret line="278" column="0" lean-forward="true" selection-start-line="278" selection-start-column="0" selection-end-line="278" selection-end-column="0" />
           <folding>
             <element signature="e#764#782#0" expanded="true" />
           </folding>

@@ -161,7 +161,7 @@ with open('all_connections.csv', mode='r') as csv_file:
         elif signal_1.split("_")[0] == "SQF":
             connections_values[key] = [SQF_lower, SQF_upper]
         else:
-            connections_values[key] = [0, 1.0e9]
+            connections_values[key] = [0, disconnected_upper]
         line_count += 1
     print(f'Processed {line_count} lines.')
 
@@ -199,7 +199,10 @@ for i in range(N_signal_name):
         pair = signal_names_list[0] + signal_names_list[1]
 
         if pair in connections_values.keys():
-            write_connected(signal_name1_orig, signal_name2_orig, f, connections_values[pair][0], connections_values[pair][1])
+            if signal_name2_decomp[0] == "LED":
+                write_LED(signal_name2_orig, signal_name1_orig, f)
+            else:
+                write_connected(signal_name1_orig, signal_name2_orig, f, connections_values[pair][0], connections_values[pair][1])
         elif len(signal_name1) >= 4 and signal_name1[0:4] == 'AGND' and \
                 len(signal_name2) >= 4 and signal_name2[0:4] == 'AGND':
             write_connected(signal_name1_orig, signal_name2_orig, f, 0, GND_to_GND)
