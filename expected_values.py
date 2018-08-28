@@ -19,6 +19,8 @@ SQ_upper = 12.0e3                # upper bound of expected resistance for SQUID 
 SQF_lower = 5.0e3                # lower bound of expected resistance for SQUID Feedback Bias connections
 SQF_upper = 8.0e3                # upper bound of expected resistance for SQUID Feedback Bias connections
 GND_to_GND = 10
+LED_forward_lower = 8.0e6
+LED_forward_upper = 11.0e6
 
 def is_ground(signal_name):
     signal_name_decomp = signal_name.split("_")
@@ -32,7 +34,7 @@ def write_connected(signal_name1, signal_name2, f, exp_min, exp_max):
     """
     f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}' \
             .format(signal_name1, signal_name2, "Connected", \
-                    round(np.random.rand(), 3), round(np.random.rand(), 3) + 3))
+                    exp_min, exp_max))
     f.write('\n')
     return
 
@@ -59,7 +61,7 @@ def write_LED(LED_sig, LED_com, f):
     """
     f.write('{:^20s}{:^20s}{:^20s}{:^20f}{:^20f}'
             .format(LED_sig, LED_com, "LED_forward",
-                    round(np.random.rand(), 3), round(np.random.rand(), 3) + 3))
+                    LED_forward_lower, LED_forward_upper))
     f.write('\n')
 
     f.write('{:^20s}{:^20s}{:^20s}{:^20s}{:^20s}'
@@ -160,6 +162,7 @@ with open('all_connections.csv', mode='r') as csv_file:
             connections_values[key] = [SQF_lower, SQF_upper]
         else:
             connections_values[key] = [0, 1.0e9]
+        line_count += 1
     print(f'Processed {line_count} lines.')
 
 ground_connections = list(connect_w_ground.keys())
