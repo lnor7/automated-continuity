@@ -17,7 +17,9 @@ from decimal import Decimal
 
 disconnected_lower = 40.0e6    # lower bound for the resistance between supposedly disconnected channels
 
-
+# if this is an empty set, then we measure every possible pair of channels
+# otherwise, we only measure pairs of channels that contain at least one of the element in the set
+channels_of_interest = set([])
 
 def measure(row, f, signal_name_to_VIB, VIB_to_matrix_loc):
     """
@@ -245,6 +247,11 @@ parallel_index_list = []
 start = time.time()
 for i in range(len(expected)):
     row = expected[i]
+
+    if len(channels_of_interest) != 0 and row[0] not in channels_of_interest \
+            and row[1] not in channels_of_interest:
+        continue
+
     # checking whether we should save this measurement to later so that we can
     # save some time by measuring multiple supposedly disconnected connections together in parallel
     if row[0] == curr_signal1 and row[2] == 'Disconnected':
