@@ -1,0 +1,226 @@
+Finished checking SQ_6
+
+Finished checking TES_BIAS_7
+
+Finished checking SQ_RTN_7
+
+Finished checking SQF_6
+
+Finished checking TES_BIAS_9
+
+Finished checking SQF_RTN_7
+
+Finished checking SQF_8
+
+Finished checking SQ_RTN_8
+
+Finished checking SQF_9
+
+Finished checking SQ_RTN_10
+
+Finished checking TES_BIAS_10
+
+Finished checking SQ_11
+
+Finished checking SQF_RTN_10
+
+Finished checking SQF_11
+
+Finished checking SQ_RTN_6
+
+Finished checking TES_BIAS_6
+
+Finished checking SQ_7
+
+Finished checking SQF_RTN_6
+
+Finished checking TES_BIAS_8
+
+Finished checking SQF_7
+
+Finished checking SQF_RTN_8
+
+Finished checking SQ_8
+
+Finished checking SQF_RTN_9
+
+Finished checking SQ_RTN_9
+
+Finished checking SQ_9
+
+Finished checking SQ_10
+
+Finished checking TES_BIAS_11
+
+Finished checking SQ_RTN_11
+
+Finished checking SQF_10
+
+Finished checking SQF_RTN_11
+
+Finished checking QDR_3
+
+Finished checking QFB_3
+
+Finished checking QDR_2
+
+Finished checking QFB_2
+
+Finished checking QDM_2
+
+Finished checking QGSET_2
+
+Finished checking QDM_3
+
+Finished checking QGSET_3
+
+Finished checking QBIAS_2
+
+Finished checking QRST_B-
+
+Finished checking QBIAS_3
+
+Finished checking QRST_B+
+
+Finished checking LED_3
+
+Finished checking LED_COM_BOT
+
+Finished checking LED_4
+
+Finished checking LED_5
+
+Finished checking AGND_BOT
+
+Possible short detected on TES_BIAS_4
+Isolating short...
+
+Short detected between TES_BIAS_4 and CHASSIS with value 4569934.9313448
+Finished checking TES_BIAS_4
+
+Finished checking SQF_5
+
+Finished checking SQ_5
+
+Finished checking SQF_RTN_4
+
+Finished checking SQ_RTN_4
+
+Finished checking SQ_3
+
+Finished checking TES_BIAS_2
+
+Finished checking SQ_2
+
+Finished checking SQF_RTN_3
+
+Finished checking SQF_RTN_2
+
+Finished checking SQF_1
+
+Finished checking SQ_1
+
+Finished checking SQF_RTN_0
+
+Finished checking SQ_RTN_0
+
+Finished checking THERM_V-
+
+Finished checking THERM_V+
+
+Finished checking THERM_I-
+
+Possible short detected on TES_BIAS_5
+Isolating short...
+
+Short detected between TES_BIAS_5 and CHASSIS with value 4613108.1431759
+Finished checking TES_BIAS_5
+
+Finished checking SQF_RTN_5
+
+Finished checking SQ_RTN_5
+
+Finished checking SQF_4
+
+Finished checking SQ_4
+
+Finished checking SQ_RTN_3
+
+Possible short detected on TES_BIAS_3
+Isolating short...
+
+Short detected between TES_BIAS_3 and CHASSIS with value 4627808.3579517
+Finished checking TES_BIAS_3
+
+Finished checking SQ_RTN_2
+
+Finished checking SQF_3
+
+Finished checking TES_BIAS_0
+
+Finished checking TES_BIAS_1
+
+Finished checking SQF_2
+
+Finished checking SQF_RTN_1
+
+Finished checking SQ_RTN_1
+
+Finished checking SQF_0
+
+Finished checking SQ_0
+
+Finished checking THERM_I+
+
+Finished checking QDR_0
+
+Finished checking QFB_0
+
+Finished checking QDR_1
+
+Finished checking QFB_1
+
+Possible short detected on QGSET_0
+Isolating short...
+
+Short detected between QGSET_0 and CHASSIS with value 5261577.5615923
+Finished checking QGSET_0
+
+Finished checking QDM_0
+
+Finished checking QGSET_1
+
+Finished checking QDM_1
+
+Finished checking QBIAS_1
+
+Possible short detected on QRST_T-
+Isolating short...
+
+Short detected between QRST_T- and CHASSIS with value 5757247.7463716
+Finished checking QRST_T-
+
+Finished checking QBIAS_0
+
+Possible short detected on QRST_T+
+Isolating short...
+
+Short detected between QRST_T+ and CHASSIS with value 5691415.6750605
+Finished checking QRST_T+
+
+Finished checking LED_2
+
+Finished checking LED_0
+
+Finished checking LED_1
+
+Finished checking LED_COM_TOP
+
+Possible short detected on AGND_TOP
+Isolating short...
+
+Short detected between AGND_TOP and CHASSIS with value 4817636.7318424
+Finished checking AGND_TOP
+
+Finished checking CHASSIS
+
